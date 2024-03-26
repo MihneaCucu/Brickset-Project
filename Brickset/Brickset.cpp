@@ -12,8 +12,14 @@ private:
     int an_fabricatie;
     
 public:
-    conector(string tip = "", int an_fabricatie = 0):tip(tip), an_fabricatie(an_fabricatie) {};
-//  conector(int an_fabricatie):an_fabricatie(an_fabricatie){};
+    conector(int id = 0, string tip = "", int an_fabricatie = 0):id(id), tip(tip), an_fabricatie(an_fabricatie)
+    {
+        if(an_fabricatie < 1990)
+        {
+            cout << "Eroare. Anul trebuie sa fie mai mare decat 1990.\n";
+            return;
+        }
+    };
     
     conector(const conector& other)
     {
@@ -35,7 +41,7 @@ public:
     
     ~conector() = default;
     
-    int get_id()
+    int get_id() const
     {
         return id;
     }
@@ -57,6 +63,12 @@ public:
     
     void set_an_fabricatie(int an_fabricatie )
     {
+        if(an_fabricatie < 1990)
+        {   
+            cout << "Eroare. Anul trebuie sa fie mai mare decat 1990.\n";
+            return;
+        }
+        
         this->an_fabricatie=an_fabricatie;
     }
     
@@ -71,7 +83,7 @@ private:
     vector<conector> conectori;
     
 public:
-    piesa(int cod):cod(cod){};
+    piesa(int id, int cod):id(id), cod(cod){};
     
     void add_conector(const conector& connector)
     {
@@ -118,9 +130,21 @@ public:
         return conectori;
     }
     
-    void set_conectori(vector<conector> conectori)
+    void remove_conector (int id_conector)
     {
-        this->conectori=conectori;
+        for(int i = 0; i < conectori.size(); i++)
+        {
+            if(conectori[i].get_id() == id_conector)
+            {
+                conectori.erase(conectori.begin() + i);
+                break;
+            }
+        }
+    }
+    
+    void remove_conector (conector conector)
+    {
+        remove_conector(conector.get_id());
     }
     
     friend ostream& operator<<(ostream& out, const piesa& piesa);
@@ -136,10 +160,7 @@ private:
     vector<piesa> piese;
     
 public:
-//    set_lego(string nume):nume(nume){};
-    set_lego(string nume = "", int an_lansare = 0, double pret_lansare = 0.0) : nume(nume), an_lansare(an_lansare), pret_lansare(pret_lansare) {};
-//    set_lego(int an_lansare):an_lansare(an_lansare){};
-//    set_lego(double pret_lansare):pret_lansare(pret_lansare){};
+    set_lego(int id, string nume = "", int an_lansare = 0, double pret_lansare = 0.0) : id(id), nume(nume), an_lansare(an_lansare), pret_lansare(pret_lansare) {};
     
     void add_piesa(const piesa& piece)
     {
@@ -192,6 +213,12 @@ public:
     
     void set_an_lansare(int an_lansare)
     {
+        if(an_lansare < 1990)
+        {
+            cout << "Eroare. Anul trebuie sa fie mai mare decat 1990.\n";
+            return;
+        }
+        
         this->an_lansare=an_lansare;
     }
     
@@ -205,9 +232,21 @@ public:
         this->pret_lansare=pret_lansare;
     }
     
-    void set_piese(vector<piesa> piese)
+    void remove_piesa (int id_piesa)
     {
-        this->piese=piese;
+        for(int i = 0; i < piese.size(); i++)
+        {
+            if(piese[i].get_id() == id_piesa)
+            {
+                piese.erase(piese.begin() + i);
+                break;
+            }
+        }
+    }
+    
+    void remove_piesa (piesa piesa)
+    {
+        remove_piesa(piesa.get_id());
     }
     
     friend ostream& operator<<(ostream& out, const set_lego& set_lego);
@@ -238,9 +277,21 @@ public:
         return seturi_lego;
     }
     
-    void set_seturi_lego(vector<set_lego> seturi_lego)
+    void remove_set_lego (int id_set_lego)
     {
-        this->seturi_lego=seturi_lego;
+        for(int i = 0; i < seturi_lego.size(); i++)
+        {
+            if(seturi_lego[i].get_id() == id_set_lego)
+            {
+                seturi_lego.erase(seturi_lego.begin() + i);
+                break;
+            }
+        }
+    }
+    
+    void remove_set_lego (set_lego set_lego)
+    {
+        remove_set_lego(set_lego.get_id());
     }
     
     double calculeaza_pret_mediu(int an=0) const
@@ -356,15 +407,15 @@ void citire (catalog& catalog_lego, const string& filename)
     ifstream file(filename);
 
     string nume;
-    int cod,an_lansare,an_fabricatie;
+    int id_set,id_piesa,id_conector,cod,an_lansare,an_fabricatie;
     double pret_lansare;
     string tip;
 
-    while (file >> nume >> an_lansare >> pret_lansare >> cod >> tip >> an_fabricatie)
+    while (file >> id_set >> nume >> an_lansare >> pret_lansare >> id_piesa >>cod >> id_conector >> tip >> an_fabricatie)
     {
-        set_lego set_lego(nume, an_lansare, pret_lansare);
-        piesa piesa(cod);
-        conector conector(tip, an_fabricatie);
+        set_lego set_lego(id_set, nume, an_lansare, pret_lansare);
+        piesa piesa(id_piesa, cod);
+        conector conector(id_conector, tip, an_fabricatie);
         piesa.add_conector(conector);
         set_lego.add_piesa(piesa);
         catalog_lego.add_set_lego(set_lego);
@@ -379,16 +430,18 @@ int main()
     
     //Exemple de functionalitati
     
-    //cout << catalog_lego;
-    //catalog_lego.afisare_evolutie_pret_catalog(2008, 2024);
-    //cout << catalog_lego.calculeaza_pret_mediu(2012);
+    //cout << catalog_lego <<'\n';
+    //catalog_lego.afisare_evolutie_pret_catalog(2008, 2024) <<'\n';
+    //cout << catalog_lego.calculeaza_pret_mediu(2012) <<'\n';
     
-    /*assert(conector)
+    double actual_pret_mediu = catalog_lego.calculeaza_pret_mediu(1999);
+    assert(actual_pret_mediu == 57.2);
+    cout << "Test passed, actual_pret_mediu\n";
+    
     string expected_tip = "tip3";
-    conector conector(expected_tip);
+    conector conector(1, expected_tip);
     string actual_tip = conector.get_tip();
     assert(actual_tip == expected_tip);
-    cout << "Test passed, conector_tip is actual_tip\n";*/
+    cout << "Test passed, conector_tip is actual_tip\n";
     return 0;
 }
-
