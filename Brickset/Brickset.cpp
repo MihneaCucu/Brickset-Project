@@ -14,11 +14,11 @@ private:
 public:
     conector(int id = 0, string tip = "", int an_fabricatie = 0):id(id), tip(tip), an_fabricatie(an_fabricatie)
     {
-        if(an_fabricatie < 1990)
+        /*if(an_fabricatie < 1990)
         {
-            cout << "Eroare. Anul trebuie sa fie mai mare decat 1990.\n";
+            cout << an_fabricatie << " Eroare. Anul trebuie sa fie mai mare decat 1990.\n";
             return;
-        }
+        }*/
     };
     
     conector(const conector& other)
@@ -65,7 +65,7 @@ public:
     {
         if(an_fabricatie < 1990)
         {   
-            cout << "Eroare. Anul trebuie sa fie mai mare decat 1990.\n";
+            cout << an_fabricatie << " Eroare. Anul trebuie sa fie mai mare decat 1990.\n";
             return;
         }
         
@@ -215,7 +215,7 @@ public:
     {
         if(an_lansare < 1990)
         {
-            cout << "Eroare. Anul trebuie sa fie mai mare decat 1990.\n";
+            cout << an_lansare << " Eroare. Anul trebuie sa fie mai mare decat 1990.\n";
             return;
         }
         
@@ -431,10 +431,10 @@ int main()
     //Exemple de functionalitati
     
     //cout << catalog_lego <<'\n';
-    //catalog_lego.afisare_evolutie_pret_catalog(2008, 2024) <<'\n';
+    //catalog_lego.afisare_evolutie_pret_catalog(2008, 2024);
     //cout << catalog_lego.calculeaza_pret_mediu(2012) <<'\n';
     
-    double actual_pret_mediu = catalog_lego.calculeaza_pret_mediu(1999);
+    double actual_pret_mediu = catalog_lego.calculeaza_pret_mediu(2025);
     assert(actual_pret_mediu == 57.2);
     cout << "Test passed, actual_pret_mediu\n";
     
