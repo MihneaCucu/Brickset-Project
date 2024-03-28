@@ -39,7 +39,10 @@ public:
         return *this;
     }
     
-    ~conector() = default;
+    ~conector()
+    {
+        cout << "Destructor called for conector with ID: " << id << endl;
+    }
     
     int get_id() const
     {
@@ -108,7 +111,11 @@ public:
         return *this;
     }
     
-    ~piesa() = default;
+    ~piesa()
+    {
+        cout << "Destructor called for set_lego with ID: " << id << endl;
+        conectori.clear();
+    };
     
     int get_id() const
     {
@@ -189,7 +196,11 @@ public:
         return *this;
     }
     
-    ~set_lego() = default;
+    ~set_lego()
+    {
+        cout << "Destructor called for set_lego with ID: " << id << endl;
+        piese.clear();
+    }
     
     int get_id()
     {
@@ -321,7 +332,11 @@ public:
         
     }
     
-    ~catalog() = default;
+    ~catalog()
+    {
+        cout << "Destructor called for catalog with ID: " << id << endl;
+        seturi_lego.clear();
+    }
     
     friend ostream& operator<<(ostream& out, const catalog& catalog_lego);
 };
