@@ -113,7 +113,7 @@ public:
     
     ~piesa()
     {
-        cout << "Destructor called for set_lego with ID: " << id << endl;
+        cout << "Destructor called for piesa with ID: " << id << endl;
         conectori.clear();
     };
     
