@@ -2,7 +2,7 @@
 
 ## Descriere
 
-Brickset este un catalog online al tuturor seturilor LEGO aparute pana in prezent. Se stocheaza informatii legate de set, precum pretul lansarii, anul lansarii, dar si informatii referitoare la piesele setului, codul acestora, tipul conectorilor si anul fabricatiei lor.
+Brickset este un catalog online al tuturor seturilor LEGO aparute pana in prezent. Se stocheaza informatii legate de set, precum pretul lansarii, anul lansarii, dar si informatii referitoare la piesele setului, codul acestora, tipul conectorilor si anul fabricatiei lor. ## Update Am adaugat informatii despre piese speciale, ce contin un unghi.
 
 ## Funcționalități
 
