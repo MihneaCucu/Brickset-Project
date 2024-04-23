@@ -5,7 +5,10 @@
 using namespace std;
 
 set_lego::set_lego(int id, std::string nume, int an_lansare, double pret_lansare)
-    : id(id), nume(nume), an_lansare(an_lansare), pret_lansare(pret_lansare) {}
+    : id(id), nume(nume), an_lansare(an_lansare), pret_lansare(pret_lansare) 
+{
+    set_lego::increment_set(pret_lansare);
+}
 
 set_lego::set_lego(const set_lego& other) {
     id = other.id;

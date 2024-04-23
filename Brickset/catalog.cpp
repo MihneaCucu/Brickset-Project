@@ -52,6 +52,17 @@ void catalog::afisare_evolutie_pret_catalog(int begin_year, int end_year) {
     }
 }
 
+int catalog::get_contor_seturi()
+{
+    return 0;//seturi_lego[0].contor_seturi_lego;
+}
+
+
+double catalog::get_medie_cost()
+{
+    return 0;//seturi_lego[0].calculeaza_medie_cost();
+}
+
 ostream& operator<<(ostream& out, const catalog& catalog_lego)
 {
     out << "Catalog LEGO:\n";

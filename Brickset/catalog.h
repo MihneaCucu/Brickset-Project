@@ -13,6 +13,8 @@ public:
     virtual double calculeaza_pret_mediu(int an = 0) const = 0;
     virtual void afisare_evolutie_pret_catalog(int begin_year, int end_year) = 0;
     virtual ~catalog_generic() {}
+    virtual int get_contor_seturi() = 0;
+    virtual double get_medie_cost() = 0;
 };
 
 class catalog : public catalog_generic {
@@ -30,6 +32,8 @@ public:
     double calculeaza_pret_mediu(int an = 0) const override;
     void afisare_evolutie_pret_catalog(int begin_year, int end_year) override;
     void citire (const string& filename);
+    int get_contor_seturi() override;
+    double get_medie_cost() override;
 };
 
 #endif
