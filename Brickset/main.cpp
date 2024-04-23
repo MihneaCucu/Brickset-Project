@@ -35,7 +35,7 @@ int main()
     seturi[0] = new set_lego(2345, "set23", 2020, 24.55); //upcasting
     seturi[1] = new featured_set_lego(2321, "set24", 2020, 30, "Space"); //upcasting
     
-    //cout << catalog_lego.get_medie_cost() << '\n';
+    cout << catalog_lego.get_medie_cost() << '\n';
     
     for (int i = 0; i <= 1; i++)
     {

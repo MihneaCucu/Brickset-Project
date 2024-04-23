@@ -4,6 +4,9 @@
 
 using namespace std;
 
+int set_lego::contor_seturi_lego = 0;
+double set_lego::cost_total = 0;
+
 set_lego::set_lego(int id, std::string nume, int an_lansare, double pret_lansare)
     : id(id), nume(nume), an_lansare(an_lansare), pret_lansare(pret_lansare) 
 {
