@@ -9,6 +9,10 @@
 #include "piesa_speciala.h"
 #include "featured_set_lego.h"
 #include "exception_citire_catalog.cpp"
+#include "logger.h"
+#include "set_lego_factory.cpp"
+
+INITIALIZE_EASYLOGGINGPP
 
 using namespace std;
 
@@ -16,9 +20,10 @@ using namespace std;
 // 4 clase abstracte: conector_generic, piesa_generic etc
 // metode publice doar cu semnatura
 
-
 int main()
 {   
+    logger::get_instance()->log_info("Application starting");
+    
     catalog catalog_lego(1);
     
     try
@@ -37,6 +42,8 @@ int main()
     
     cout << catalog_lego.get_medie_cost() << '\n';
     
+    
+    ///Dynamic dispatch cu virtual
     for (int i = 0; i <= 1; i++)
     {
         seturi[i]->set_an_lansare(2024); //dynamic dispatch
@@ -61,6 +68,13 @@ int main()
     //catalog_lego.afisare_evolutie_pret_catalog(2008, 2024);
     //cout << catalog_lego.calculeaza_pret_mediu(2012) <<'\n';
     
+    
+    /*auto legoSet = set_lego_factory::createLegoSet(set_lego_factory::LegoSetType::Normal);
+        auto featuredSet = set_lego_factory::createLegoSet(set_lego_factory::LegoSetType::Featured);
+        auto limitedSet = set_lego_factory::createLegoSet(set_lego_factory::LegoSetType::Limited);
+        auto ucsSet = set_lego_factory::createLegoSet(set_lego_factory::LegoSetType::UCS);*/
+
+    
     double actual_pret_mediu = catalog_lego.calculeaza_pret_mediu(2025);
     assert(actual_pret_mediu == 57.2);
     cout << "Test passed, actual_pret_mediu\n";
@@ -73,3 +87,7 @@ int main()
     
 return 0;
 }
+
+
+//Utilizați minim două tipuri de date container diferite din STL în clasele
+//definite de voi.
