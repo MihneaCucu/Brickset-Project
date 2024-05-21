@@ -17,3 +17,9 @@ featured_set_lego::~featured_set_lego() {
     piese.clear();
 }
 
+void featured_set_lego::add_piesa(const piesa& piesa) {
+    if(typeid(piesa) == typeid(piesa_speciala))
+        set_lego::add_piesa(piesa);
+}
+
+// composite pattern todo pentru limited si ucs
