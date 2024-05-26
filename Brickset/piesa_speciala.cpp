@@ -3,13 +3,14 @@
 
 piesa_speciala::piesa_speciala(int id, int cod, int unghi) : piesa(id, cod), unghi(unghi) {}
 
-void piesa_speciala::add_conector(const conector& conector) {
-    if (conector.get_tip() == "tip1000") {
-        conectori.push_back(conector);
-    } else {
-        std::cout << "Nu poti instantia piese speciale cu alt tip de conector." << std::endl;
+void piesa_speciala::add_conector(std::unique_ptr<conector>& conector) {
+    try {
+        conectori.push_back(std::move(conector));
+    } catch(const std::exception& e) {
+        std::cerr << "Eroare. Nu s-a putut adauga conector: " << e.what() << '\n';
     }
 }
+
 
 int piesa_speciala::get_unghi() const {
     return unghi;
