@@ -4,11 +4,11 @@
 #include <cassert>
 #include "conector.h"
 #include "piesa.h"
-#include "set_lego.h"
 #include "catalog.h"
+#include "set_lego.h"
 #include "piesa_speciala.h"
 #include "featured_set_lego.h"
-#include "exception_citire_catalog.cpp"
+#include "exception_citire_catalog.h"
 #include "logger.h"
 #include "set_lego_factory.cpp"
 
@@ -24,7 +24,7 @@ int main()
 {   
     logger::get_instance()->log_info("Application starting");
     
-    catalog catalog_lego(1);
+    catalog<set_lego> catalog_lego(1);
     
     try
     {
@@ -36,6 +36,20 @@ int main()
         cout << "exceptie " << e.what() << '\n';
     }
     
+        catalog_lego.add_set_lego(set_lego(1, "Set1", 2020, 100.0));
+        catalog_lego.add_set_lego(set_lego(2, "Set2", 2021, 150.0));
+        catalog_lego.add_set_lego(set_lego(3, "Set3", 2021, 200.0));
+
+       // Filtrăm seturile lansate în 2021
+       auto seturi_2021 = catalog_lego.filtreaza_seturi([](const set_lego& set) {
+           return set.get_an_lansare() == 2021;
+       });
+
+       // Afișăm seturile filtrate
+       for (const auto& set : seturi_2021) {
+           std::cout << set.get_nume() << " - " << set.get_an_lansare() << " - " << set.get_pret_lansare() << std::endl;
+       }
+    
     set_lego_generic* seturi[3];
     seturi[0] = new set_lego(2345, "set23", 2020, 24.55); //upcasting
     seturi[1] = new featured_set_lego(2321, "set24", 2020, 30, "Space"); //upcasting
@@ -43,7 +57,7 @@ int main()
     cout << catalog_lego.get_medie_cost() << '\n';
     
     
-    ///Dynamic dispatch cu virtual
+    //Dynamic dispatch cu virtual
     for (int i = 0; i <= 1; i++)
     {
         seturi[i]->set_an_lansare(2024); //dynamic dispatch
@@ -88,6 +102,3 @@ int main()
 return 0;
 }
 
-
-//Utilizați minim două tipuri de date container diferite din STL în clasele
-//definite de voi.

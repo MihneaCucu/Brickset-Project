@@ -12,7 +12,8 @@ public:
     std::string get_tema() const;
     void set_tema(std::string tema);
     ~featured_set_lego() override;
-    void add_piesa(const piesa& piesa) override;
+    void add_piesa(std::shared_ptr<piesa> piesa);
+
 };
 
 #endif

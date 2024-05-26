@@ -1,17 +1,20 @@
-#ifndef limited_set_lego_h
-#define limited_set_lego_h
-#include "set_lego.h"
+#include "limited_set_lego.h"
+#include <iostream>
 
-class limited_set_lego : virtual public set_lego {
-private:
-    int interval;
+limited_set_lego::limited_set_lego(int id, std::string nume, int an_lansare, double pret_lansare, int interval)
+    : set_lego(id, nume, an_lansare, pret_lansare), interval(interval) {}
 
-public:
-    limited_set_lego(int id, std::string nume, int an_lansare, double pret_lansare, int interval);
-    int get_interval() const;
-    void set_interval(int interval);
-    ~limited_set_lego() override;
-};
+int limited_set_lego::get_interval() const {
+    return interval;
+}
 
-#endif
+void limited_set_lego::set_interval(int interval) {
+    this->interval = interval;
+}
+
+limited_set_lego::~limited_set_lego() {
+    /*std::cout << "Destructor called for limited_set_lego with time_limit: " << interval << std::endl;*/
+    piese->clear();
+}
+
 
