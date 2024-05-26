@@ -12,6 +12,7 @@ public:
     int get_number_made() const;
     void set_number_made(int number_made);
     ~UCS_set_lego() override;
+    void add_piesa(std::shared_ptr<piesa> piesa);
 };
 
 #endif
