@@ -1,24 +1,29 @@
-#include "catalog.h"
+/*#include "catalog.h"
 #include "exception_citire_catalog.cpp"
 #include <iostream>
 #include <fstream>
 
-using namespace std;
-catalog::catalog(int id) : id(id) {}
 
-void catalog::add_set_lego(const set_lego& set) {
+using namespace std;
+template<typename T>
+catalog<T>::catalog(int id) : id(id) {}
+
+template<typename T>
+void catalog<T>::add_set_lego(const T& set) {
     seturi_lego.push_back(set);
 }
 
-int catalog::get_id() const {
+template<typename T>
+int catalog<T>::get_id() const {
     return id;
 }
 
-const std::vector<set_lego>& catalog::get_seturi_lego() const {
+template<typename T>
+const std::vector<T>& catalog<T>::get_seturi_lego() const {
     return seturi_lego;
 }
-
-void catalog::remove_set_lego(int id_set_lego) {
+template<typename T>
+void catalog<T>::remove_set_lego(int id_set_lego) {
     for (auto it = seturi_lego.begin(); it != seturi_lego.end(); ++it) {
         if (it->get_id() == id_set_lego) {
             seturi_lego.erase(it);
@@ -27,11 +32,13 @@ void catalog::remove_set_lego(int id_set_lego) {
     }
 }
 
-void catalog::remove_set_lego(const set_lego& set_lego) {
+template<typename T>
+void catalog<T>::remove_set_lego(const T& set_lego) {
     remove_set_lego(set_lego.get_id());
 }
 
-double catalog::calculeaza_pret_mediu(int an) const {
+template<typename T>
+double catalog<T>::calculeaza_pret_mediu(int an) const {
     double sum = 0;
     int count = 0;
 
@@ -46,24 +53,27 @@ double catalog::calculeaza_pret_mediu(int an) const {
     return sum / count;
 }
 
-void catalog::afisare_evolutie_pret_catalog(int begin_year, int end_year) {
+template<typename T>
+void catalog<T>::afisare_evolutie_pret_catalog(int begin_year, int end_year) {
     for (int i = begin_year; i <= end_year; i++) {
         std::cout << i << ' ' << calculeaza_pret_mediu(i) << '\n';
     }
 }
 
-int catalog::get_contor_seturi()
+template<typename T>
+int catalog<T>::get_contor_seturi()
 {
     return seturi_lego[0].contor_seturi_lego;
 }
 
-
-double catalog::get_medie_cost()
+template<typename T>
+double catalog<T>::get_medie_cost()
 {
     return seturi_lego[0].calculeaza_medie_cost();
 }
 
-ostream& operator<<(ostream& out, const catalog& catalog_lego)
+template<typename T>
+ostream& operator<<(ostream& out, const catalog<T>& catalog_lego)
 {
     out << "Catalog LEGO:\n";
         
@@ -90,7 +100,8 @@ ostream& operator<<(ostream& out, const catalog& catalog_lego)
     return out;
 }
 
-void catalog::citire (const string& filename)
+template<typename T>
+void catalog<T>::citire (const string& filename)
 {   try
     {
         ifstream file(filename);
@@ -102,7 +113,7 @@ void catalog::citire (const string& filename)
         
         while (file >> id_set >> nume >> an_lansare >> pret_lansare >> id_piesa >>cod >> id_conector >> tip >> an_fabricatie)
         {
-            set_lego set_lego(id_set, nume, an_lansare, pret_lansare);
+            T set_lego(id_set, nume, an_lansare, pret_lansare);
             piesa piesa(id_piesa, cod);
             conector conector(id_conector, tip, an_fabricatie);
             piesa.add_conector(conector);
@@ -117,3 +128,4 @@ void catalog::citire (const string& filename)
         throw exception_citire_catalog();
     }
 }
+*/
