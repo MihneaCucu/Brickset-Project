@@ -1,4 +1,4 @@
-#include <exception>
+/*#include <exception>
 #include <string>
 using namespace std;
 
@@ -11,3 +11,4 @@ public:
     exception_citire_catalog(const string& msg = "Eroare citire catalog"): msg(msg){};
     virtual const char * what() const noexcept override{return msg.c_str();};
 };
+*/
