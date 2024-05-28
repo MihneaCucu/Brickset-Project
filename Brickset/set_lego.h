@@ -1,6 +1,6 @@
 #ifndef SET_LEGO_H
 #define SET_LEGO_H
-#include <list>
+#include <vector>
 #include <map>
 #include <memory>
 #include "piesa.h"
@@ -13,8 +13,8 @@ public:
     virtual void set_an_lansare(int an_lansare) = 0;
     virtual double get_pret_lansare() const = 0;
     virtual void set_pret_lansare(double pret_lansare) = 0;
-    virtual const std::list<std::shared_ptr<piesa>>& get_piese() const = 0;
-    virtual void add_piesa(std::shared_ptr<piesa> piesa) = 0;
+    virtual const std::vector<piesa>& get_piese() const = 0;
+    virtual void add_piesa(const piesa& piesa) = 0;
     virtual void remove_piesa(int id_piesa) = 0;
     virtual const std::map<std::string, int>& get_nr_piese() const = 0;
     virtual ~set_lego_generic() {}
@@ -28,8 +28,8 @@ private:
     int an_lansare;
 
 protected:
-    std::unique_ptr<std::list<std::shared_ptr<piesa>>> piese;
-        std::unique_ptr<std::map<std::string, int>> nr_piese;
+    std::vector<piesa> piese;
+    std::map<std::string, int> nr_piese;
 
 public:
     static void increment_set(double pret_lansare) {
@@ -55,8 +55,8 @@ public:
     void set_an_lansare(int an_lansare) override;
     double get_pret_lansare() const override;
     void set_pret_lansare(double pret_lansare) override;
-    const std::list<std::shared_ptr<piesa>>& get_piese() const override;
-    void add_piesa(std::shared_ptr<piesa> piesa) override;
+    const std::vector<piesa>& get_piese() const override;
+    void add_piesa(const piesa& piesa) override;
     void remove_piesa(int id_piesa) override;
     const std::map<std::string, int>& get_nr_piese() const override;
 

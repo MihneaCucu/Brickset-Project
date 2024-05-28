@@ -17,15 +17,14 @@ void UCS_set_lego::set_number_made(int number_made)
 UCS_set_lego::~UCS_set_lego() 
 {
     /*std::cout << "Destructor called for UCS_set_lego with number_made:  " << number_made << std::endl;*/
-    piese->clear();
+    piese.clear();
 }
 
-void UCS_set_lego::add_piesa(std::shared_ptr<piesa> piesa)
+void UCS_set_lego::add_piesa(const piesa& piesa)
 {
-    if (std::dynamic_pointer_cast<piesa_speciala>(piesa))
-    {
+    if(typeid(piesa) == typeid(piesa_speciala))
         set_lego::add_piesa(piesa);
-    }
 }
+
 
 //composite pattern
