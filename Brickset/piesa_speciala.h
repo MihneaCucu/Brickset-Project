@@ -9,7 +9,7 @@ private:
 
 public:
     piesa_speciala(int id, int cod, int unghi);
-    void add_conector(std::unique_ptr<conector>& conector);
+    void add_conector(conector& conector);
     int get_unghi() const;
     void set_unghi(int unghi);
     ~piesa_speciala() override;

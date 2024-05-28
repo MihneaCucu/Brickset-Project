@@ -14,7 +14,7 @@ void limited_set_lego::set_interval(int interval) {
 
 limited_set_lego::~limited_set_lego() {
     /*std::cout << "Destructor called for limited_set_lego with time_limit: " << interval << std::endl;*/
-    piese->clear();
+    piese.clear();
 }
 
 

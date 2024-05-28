@@ -83,11 +83,11 @@ public:
             while (file >> id_set >> nume >> an_lansare >> pret_lansare >> id_piesa >>cod >> id_conector >> tip >> an_fabricatie)
             {
                 T set_lego(id_set, nume, an_lansare, pret_lansare);
-                std::shared_ptr<piesa> ptr_piesa = std::make_shared<piesa>(id_piesa, cod);
+                piesa ptr_piesa = piesa(id_piesa, cod);
                 
                 conector conector(id_conector, tip, an_fabricatie);
                 
-                ptr_piesa->add_conector(conector);
+                ptr_piesa.add_conector(conector);
 
                 set_lego.add_piesa(ptr_piesa);
                 

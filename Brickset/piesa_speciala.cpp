@@ -3,7 +3,7 @@
 
 piesa_speciala::piesa_speciala(int id, int cod, int unghi) : piesa(id, cod), unghi(unghi) {}
 
-void piesa_speciala::add_conector(std::unique_ptr<conector>& conector) {
+void piesa_speciala::add_conector(conector& conector) {
     try {
         conectori.push_back(std::move(conector));
     } catch(const std::exception& e) {

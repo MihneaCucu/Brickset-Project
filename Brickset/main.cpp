@@ -1,6 +1,8 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <list>
+#include <memory>
 #include <cassert>
 #include "conector.h"
 #include "piesa.h"
@@ -50,17 +52,27 @@ int main()
            std::cout << set.get_nume() << " - " << set.get_an_lansare() << " - " << set.get_pret_lansare() << std::endl;
        }
     
-    set_lego_generic* seturi[3];
-    seturi[0] = new set_lego(2345, "set23", 2020, 24.55); //upcasting
-    seturi[1] = new featured_set_lego(2321, "set24", 2020, 30, "Space"); //upcasting
+    //set_lego_generic* seturi[3];
+    //seturi[0] = new set_lego(2345, "set23", 2020, 24.55); //upcasting
+    //seturi[1] = new featured_set_lego(2321, "set24", 2020, 30, "Space"); //upcasting
+    
+    std::list<std::shared_ptr<set_lego_generic>> seturi;
+    seturi.push_back(std::make_shared<set_lego>(2345, "set23", 2020, 24.55));
+    seturi.push_back(std::make_shared<featured_set_lego>(2321, "set24", 2020, 30, "Space"));
+    
     
     cout << catalog_lego.get_medie_cost() << '\n';
     
     
     //Dynamic dispatch cu virtual
-    for (int i = 0; i <= 1; i++)
+    /*for (int i = 0; i <= 1; i++)
     {
         seturi[i]->set_an_lansare(2024); //dynamic dispatch
+    }*/
+    
+    for (auto & set : seturi)
+    {
+        set->set_an_lansare(2024); //dynamic dispatch
     }
     
     piesa_generic* piese[3];
@@ -69,10 +81,10 @@ int main()
     
     
     
-    for (int i = 0; i <= 1; i++)
+    /*for (int i = 0; i <= 1; i++)
     {
-        seturi[i]->set_an_lansare(2024); //dynamic dispatch
-    }
+        seturi[i]->set_an_lansare(2012); //dynamic dispatch
+    }*/
     
     // pentru piesa speciala
     
@@ -98,6 +110,8 @@ int main()
     string actual_tip = conector.get_tip();
     assert(actual_tip == expected_tip);
     cout << "Test passed, conector_tip is actual_tip\n";
+    
+    
     
 return 0;
 }

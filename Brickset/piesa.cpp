@@ -20,19 +20,19 @@ void piesa::set_cod(int cod) {
     this->cod = cod;
 }
 
-void piesa::add_conector(std::unique_ptr<conector> conector) {
+void piesa::add_conector(conector conector) {
     conectori.push_back(std::move(conector));
 }
 
-const std::vector<std::unique_ptr<conector>>& piesa::get_conectori() const {
+const std::vector<conector>& piesa::get_conectori() const {
     return conectori;
 }
 
 void piesa::remove_conector(int id_conector) {
     conectori.erase(
         std::remove_if(conectori.begin(), conectori.end(),
-            [id_conector](const std::unique_ptr<conector>& ptr) {
-                return ptr->get_id() == id_conector;
+            [id_conector](conector& ptr) {
+                return ptr.get_id() == id_conector;
             }),
         conectori.end()
     );

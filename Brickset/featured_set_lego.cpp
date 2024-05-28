@@ -17,15 +17,13 @@ void featured_set_lego::set_tema(std::string tema)
 featured_set_lego::~featured_set_lego() 
 {
     /*std::cout << "Destructor called for featured_set_lego with theme: " << tema << std::endl;*/
-    piese->clear();
+    piese.clear();
 }
 
-void featured_set_lego::add_piesa(std::shared_ptr<piesa> piesa) 
+void featured_set_lego::add_piesa(const piesa& piesa) 
 {
-    if (std::dynamic_pointer_cast<piesa_speciala>(piesa))
-    {
+    if(typeid(piesa) == typeid(piesa_speciala))
         set_lego::add_piesa(piesa);
-    }
 }
 
 
